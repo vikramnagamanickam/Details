@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MyDataAccessLayer.Entity
 {
-    class CricketDetails
+  public  class CricketDetails
     {
         public long CricketersID { get; set; }
 
-        public long CricketerName { get; set; }
+        public string CricketerName { get; set; }
 
         public long Totalinnings { get; set; }
 
