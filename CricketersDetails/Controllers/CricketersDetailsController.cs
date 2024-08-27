@@ -11,13 +11,14 @@ using MyDataAccessLayer.Entity;
 namespace CricketersDetails.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] 
     public class CricketersDetailsController : ControllerBase
     {
-        CricketersDetailsRepository crics = null;
-        public CricketersDetailsController()
+        ICricketersDetailsRepository crics = null;
+       
+        public CricketersDetailsController(ICricketersDetailsRepository Regs)
         {
-            crics = new CricketersDetailsRepository();
+            crics = Regs;
         }
         // GET: api/<ValuesController>
         [HttpGet]

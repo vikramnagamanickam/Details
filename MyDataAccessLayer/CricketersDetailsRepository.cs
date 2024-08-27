@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 using MyDataAccessLayer.Entity;
 
 namespace MyDataAccessLayer
 {
-    public class CricketersDetailsRepository
+    public class CricketersDetailsRepository:ICricketersDetailsRepository
     {
-        string connectionString = "server=DESKTOP-BLBGEHJ\\SQLEXPRESS;database=Cricketerslist;user Id=sa;password=Anaiyaan@123;";
+        string connectionString = null;//"server=DESKTOP-BLBGEHJ\\SQLEXPRESS;database=Cricketerslist;user Id=sa;password=Anaiyaan@123;";
         SqlConnection con = null;
 
-        public CricketersDetailsRepository()
+        public CricketersDetailsRepository(IConfiguration configuration)
         {
+            connectionString = configuration.GetConnectionString("DbConnection");
             con = new SqlConnection(connectionString);
         }
         public List<CricketDetails> SelectALLUser()
