@@ -13,6 +13,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using MyDataAccessLayer;
 using BussinessLayer;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 namespace CricketersDetails
 {
@@ -31,8 +33,13 @@ namespace CricketersDetails
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = Configuration.GetConnectionString("DbConnection");
+            services.AddDbContext<LocationDbContext>(options => options.UseSqlServer(connection));
+
             services.AddTransient<ICricketersDetailsRepository, CricketersDetailsRepository>();
-            services.AddTransient<IEmailRepository, EmailRepository>();
+          
+            services.AddTransient<ILocationRepository, LocationRepository>();
+                        services.AddTransient<IEmailRepository, EmailRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
