@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MyDataAccessLayer;
+using BussinessLayer;
 
 namespace CricketersDetails
 {
@@ -20,6 +21,8 @@ namespace CricketersDetails
         public Startup(IConfiguration configuration)
         {
             var connection = configuration.GetConnectionString(" DbConnection");
+            var fromaddress = configuration.GetValue<string>("SMTP:Fromaddress");
+            var password = configuration.GetValue<string>("SMTP:Password");
             Configuration = configuration;
         }
 
@@ -29,7 +32,7 @@ namespace CricketersDetails
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<ICricketersDetailsRepository, CricketersDetailsRepository>();
-
+            services.AddTransient<IEmailRepository, EmailRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
