@@ -7,12 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyDataAccessLayer
 {
-    public interface ILocationRepository
-    {
-        public void InsertLocation(Location loc);
-        public List<Location> GetAllLocation();
-    }
-
+  
 
     public class LocationRepository : ILocationRepository
     {
@@ -64,8 +59,36 @@ namespace MyDataAccessLayer
             {
                 throw;
             }
-
-
         }
+        public void UpdateLocation(Location loc)
+        {
+            try
+            {
+                dbContext.Update(loc);
+                dbContext.SaveChanges();
+                
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        } 
+
+            
+        public void Deletelocation(long id)
+        {
+            try
+            {
+                var count = dbContext.Location.Find(id);
+                dbContext.Location.Remove(count);
+                dbContext.SaveChanges();
+            }catch(Exception ex)
+            {
+                throw;
+            }
+        }
+
+        
     }
 }

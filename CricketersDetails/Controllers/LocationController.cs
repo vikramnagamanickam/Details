@@ -39,10 +39,18 @@ namespace Sample.WebAPI.Controllers
         }
 
         // GET api/<LocationController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{name}")]
+        public IActionResult Get(string name)
         {
-            return "value";
+            try
+            {
+                rep.GetLocationByName(name);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         // POST api/<LocationController>
@@ -65,15 +73,32 @@ namespace Sample.WebAPI.Controllers
 
             // PUT api/<LocationController>/5
             [HttpPut("{id}")]
-          public IActionResult Put(int id, [FromBody] Location value)
+          public IActionResult Put( [FromBody] Location value)
             {
+            try
+            {
+                rep.UpdateLocation(value);
                 return Ok();
+
+            }catch(Exception ex)
+            {
+                throw;
+            }
+                
             }
 
             // DELETE api/<LocationController>/5
             [HttpDelete("{id}")]
-            public void Delete(int id)
+            public IActionResult Delete(long id)
             {
+            try
+            {
+                rep.Deletelocation(id);
+                return Ok();
+            }catch(Exception ex)
+            {
+                throw;
+            }
 
             }
 
