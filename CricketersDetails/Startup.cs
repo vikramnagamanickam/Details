@@ -39,7 +39,7 @@ namespace CricketersDetails
             services.AddTransient<ICricketersDetailsRepository, CricketersDetailsRepository>();
           
             services.AddTransient<ILocationRepository, LocationRepository>();
-                        services.AddTransient<IEmailRepository, EmailRepository>();
+            services.AddTransient<IEmailRepository, EmailRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
